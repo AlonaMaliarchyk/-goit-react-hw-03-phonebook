@@ -25,10 +25,12 @@ export default class App extends Component {
   }
   
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     const { contacts } = this.state;
-    localStorage.setItem("contacts", JSON.stringify(contacts));
+    if (prevState.contacts.length !== contacts.length) {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
     }
+  }
 
   formSubmitHandl = data => {
     const { name, number } = data;
